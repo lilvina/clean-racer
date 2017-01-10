@@ -1,31 +1,17 @@
-var pgp = require('pg-promise')()
-var db = pgp(connection);
+const pgPromise = require('pg-promise')
+const pgp = pgPromise()
+const db = pgp( `postgres://${process.env.USER}@localhost:5432/clean-racer` )
 
-function getAllLists(req, res, next){
-	return db.many('SELECT * FROM list')
+const insertTodo = 'INSERT INTO todo (list_id, type_id, importance, complete, due_date ) VALUES ($1, $2, $3, $4, $5)'
+
+const createList = (category, number) => {
+	const insertList = `INSERT INTO ${category} (number) VALUES ($1)`
+	return db.oneOrNone(insertList, [number])
 }
 
-// var createList = 'INSERT INTO list '
-function createList(name){
-	return db.many(
-		`INSERT INTO list(id, description) 
-		VALUES($1, $2)`
-	)
+const Todo = {
+	createList: (category, number) => createList(category, number),
+	insert: number => db.oneOrNone(insertList, [number])
 }
 
-function deleteList(){
-	return db.many(
-		`DELETE FROM
-		list(id, description) 
-		VALUES($1, $2)`
-	)
-}
-
-
-// to create list name
-INSERT INTO list(id,description)
-VALUES(2,'Shopping')
-
-// to delete whole list name
-DELETE FROM list(id,description)
-VALUES(2,'Shopping')
+module.exports = Todo

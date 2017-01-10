@@ -1,38 +1,55 @@
-DROP TABLE IF EXISTS "list";
-CREATE TABLE "list" (
-	id SERIAL PRIMARY KEY,
-	description VARCHAR DEFAULT NULL
-);
-
-DROP TABLE IF EXISTS "todo_type";
-CREATE TABLE "todo_type" (
-	id SERIAL PRIMARY KEY,
-	description VARCHAR
+DROP TABLE IF EXISTS "list_todo";
+CREATE TABLE "list_todo" (
+	todo_id INTEGER, 
+	list_id INTEGER
 );
 
 DROP TABLE IF EXISTS "todo";
 CREATE TABLE "todo" (
 	id SERIAL PRIMARY KEY,
-	list_id INTEGER NOT NULL,
-	type_id INTEGER NOT NULL,
 	importance INTEGER,
-	description VARCHAR,
 	complete BOOLEAN DEFAULT false,
-	due_date DATE,
-	due_time TIME
+	due_date VARCHAR
 );
-ALTER TABLE todo ADD FOREIGN KEY (list_id) REFERENCES "list" ("id") ON DELETE CASCADE;
 
-INSERT INTO todo_type (description) VALUES ('Bills'), ('Chores'), ('Shopping');
+DROP TABLE IF EXISTS "bills";
+CREATE TABLE "bills" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT 'Need to Pay',
+	number INTEGER
+);
 
-INSERT INTO list (description) VALUES ('stuff');
+DROP TABLE IF EXISTS "chores";
+CREATE TABLE "chores" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT 'Need todo',
+	number INTEGER
+);
 
-INSERT INTO todo (list_id, type_id, description) VALUES
-(1, 1, 'do things');
-INSERT INTO todo (list_id, type_id, description) VALUES
-(1, 2, 'do things 2');
-INSERT INTO todo (list_id, type_id, description) VALUES
-(1, 3, 'do things 3');
-INSERT INTO todo (list_id, type_id, description) VALUES
-(1, 3, 'do things 4');
+DROP TABLE IF EXISTS "shopping";
+CREATE TABLE "shopping" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT 'Need to buy',
+	number INTEGER
+);
 
+DROP TABLE IF EXISTS "exercise";
+CREATE TABLE "exercise" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT 'Exercises',
+	number INTEGER
+);
+
+DROP TABLE IF EXISTS "errands";
+CREATE TABLE "errands" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT NULL,
+	number INTEGER
+);
+
+DROP TABLE IF EXISTS "miscellaeous";
+CREATE TABLE "miscellaeous" (
+	id SERIAL PRIMARY KEY,
+	description VARCHAR DEFAULT NULL,
+	number INTEGER
+);
