@@ -44,4 +44,5 @@ const deleteT = (id) =>
 // 	insert: number => db.oneOrNone(insertList, [number])
 // }
 
-module.exports = {addT, createL, updateT, updateL, deleteL, deleteT}
+module.exports = {addT, createL, updateT, updateL, deeteL, deleteT}
+
