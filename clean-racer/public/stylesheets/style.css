@@ -4,5 +4,21 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: red;
+}
+
+ol {
+  display: block;
+  list-style: decimal;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+  font-size: 4px;
+
+}
+li{
+  font-size: 2em;
+  padding:1em;
 }

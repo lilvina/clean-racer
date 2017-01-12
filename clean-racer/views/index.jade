@@ -7,72 +7,23 @@ block content
       meta(charset='UTF-8')
       title title
       link(rel='stylesheet', href='styles.css', type='text/css')
+      block scripts
+        script(src='/jquery.js')
     body
       center
-        #list
-          input.1
-          button.list_button  +
-          h2.list_title EXERCISE
-          .todo_container
-            input.2
-            button.list_button1  +
-            ol
-              .todo_item_container
-                li.todo_item
-                  | 20 PUSH UPS
-                  input#cbox1(type='checkbox', value='first_checkbox')
-                  .when
-                    input(type='date', step='7', min='2014-09-08')
-                    |  -
-                    input(type='time', min='9:00', max='17:00', step='900')
-                  select
-                    option(value='1') DO NOW
-                    option(value='2') DO LATER
-                    option(value='3') DO WHENEVER
-                  br
-                label
-                  button.list_button1  -
-              .todo_item_container
-                li.todo_item
-                  | 20 SQUATS
-                  input#cbox1(type='checkbox', value='first_checkbox')
-                  .when
-                    input(type='date', step='7', min='2014-09-08')
-                    |  -
-                    input(type='time', min='9:00', max='17:00', step='900')
-                  select
-                    option(value='1') DO NOW
-                    option(value='2') DO LATER
-                    option(value='3') DO WHENEVER
-                  br
-                button.list_button1  -
-              .todo_item_container
-                li.todo_item
-                  | 5 MIN CARDIO
-                  input#cbox1(type='checkbox', value='first_checkbox')
-                  .when
-                    input(type='date', step='7', min='2014-09-08')
-                    |  -
-                    input(type='time', min='9:00', max='17:00', step='900')
-                  select
-                    option(value='1') DO NOW
-                    option(value='2') DO LATER
-                    option(value='3') DO WHENEVER
-                  br
-                button.list_button1  -
-              .todo_item_container
-                li.todo_item
-                  | FULL BODY STRETCH
-                  input#cbox1(type='checkbox', value='first_checkbox')
-                  .when
-                    input(type='date', step='7', min='2014-09-08')
-                    |  -
-                    input(type='time', min='9:00', max='17:00', step='900')
-                  select
-                    option(value='1') DO NOW
-                    option(value='2') DO LATER
-                    option(value='3') DO WHENEVER
-                  br
-                button.list_button1  -
+        h1.title WHAT ARE YOU GONNA DO TODAY?
+        form(action="/todos", method="post")
+          #list
+            input.1(type='text', name='title', placeholder='What to do?')
+            input.1(type='text', name='description', placeholder='describe your todo.')
+
+            button.list_button
+              strong +
+
+        ol
+        each todo in todos
+          li.todo_title=todo.title
+
           .bottom_delete
-            button.list_button  -
+            a(style="text-decoration: none;", type="button", href="/delete/todos/" + todo.id).todo_button
+              strong DONE

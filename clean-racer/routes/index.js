@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Todo = require('../database/db')
+var db = require('../queries.js');
 
-/* GET home page. */
-router.get('/home', (req, res) => res.render('index.jade', {title: 'bills'}))
-
-router.get('/insert_list/:category', function(req, res, next) {
-  const { category } = req.params	
-
-  Todo.createList(category, 1).then(list => res.json(list))		
-});
+// Get all todos
+router.get('/todos', db.getAllTodos);
+// Get single todo
+router.get('/todos/:id', db.getSingleTodo);
+// Create a todo
+router.post('/todos', db.createTodo);
+// Delete todo
+router.get('/delete/todos/:id', db.removeTodo);
 
 module.exports = router;
