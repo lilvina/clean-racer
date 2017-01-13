@@ -14,16 +14,21 @@ block content
         h1.title WHAT ARE YOU GONNA DO TODAY?
         form(action="/todos", method="post")
           #list
-            input.1(type='text', name='title', placeholder='What to do?')
-            input.1(type='text', name='description', placeholder='describe your todo.')
+            input.1(type='text', name='description', placeholder='What to do?')
+
 
             button.list_button
               strong +
 
         ol
         each todo in todos
-          li.todo_title=todo.title
+          li.todo_title=todo.description
+            form(action="/edit/todos/" + todo.id, method="post")
+              input(type='text', name='description',placeholder='Edit yo todo...')
+              button.list_button
+                strong +
 
           .bottom_delete
             a(style="text-decoration: none;", type="button", href="/delete/todos/" + todo.id).todo_button
               strong DONE
+              div(style='display: inline')

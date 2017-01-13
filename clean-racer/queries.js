@@ -15,7 +15,7 @@ function createTodo(request, response, next) {
 
 //Get all todos from database
 function getAllTodos(request, response, next) {
-  var selectAllTodos = 'SELECT * FROM todos'
+  var selectAllTodos = 'SELECT * FROM todos ORDER BY description'
 
   db.any(selectAllTodos)
     .then(function(todos) {
@@ -53,9 +53,25 @@ function removeTodo(request, response, next) {
   .catch(function(err) { return next(err); });
 }
 
+//Edit todo
+function editTodo(request,response,next){
+  var editTodo = 'UPDATE todos SET description = $1 WHERE id = $2'
+  var todoId = parseInt(request.params.id);
+  var description = request.body.description 
+  db.oneOrNone(editTodo,[description , todoId]).then(function(){
+    response.redirect('/todos')
+  })
+  .catch(function(err) {return next(err); });
+}
+
+
+
+
+
 module.exports = {
   getAllTodos,
   getSingleTodo,
   createTodo,
-  removeTodo
+  removeTodo,
+  editTodo
 }
