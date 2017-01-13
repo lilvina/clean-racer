@@ -6,29 +6,32 @@ block content
     head
       meta(charset='UTF-8')
       title title
-      link(rel='stylesheet', href='styles.css', type='text/css')
+      link(rel='stylesheet', href='style.css', type='text/css')
+      link(href='https://fonts.googleapis.com/css?family=Josefin+Slab|Lobster|Questrial', rel='stylesheet')
       block scripts
-        script(src='/jquery.js')
+        script(src='/scripts.js')
     body
+
       center
         h1.title WHAT ARE YOU GONNA DO TODAY?
-        form(action="/todos", method="post")
-          #list
-            input.1(type='text', name='description', placeholder='What to do?')
+        div.list
+          form(action="/todos", method="post")
+            #list
+              input.1(type='text', name='description', placeholder='What to do?')
 
 
-            button.list_button
-              strong +
-
-        ol
-        each todo in todos
-          li.todo_title=todo.description
-            form(action="/edit/todos/" + todo.id, method="post")
-              input(type='text', name='description',placeholder='Edit yo todo...')
-              button.list_button
+              button.list_button1
                 strong +
 
-          .bottom_delete
-            a(style="text-decoration: none;", type="button", href="/delete/todos/" + todo.id).todo_button
-              strong DONE
-              div(style='display: inline')
+          ol
+          each todo in todos
+            li.todo_title=todo.description
+              form(action="/edit/todos/" + todo.id, method="post")
+                input(type='text', name='description',placeholder='Edit yo todo...')
+                button.list_button
+                  strong.add +
+
+            .bottom_delete
+              a(style="text-decoration: none;", type="button", href="/delete/todos/" + todo.id).todo_button
+                strong.done DONE
+                div(style='display: inline')
